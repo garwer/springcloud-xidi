@@ -1,0 +1,14 @@
+#使用bootstrap优先启动 先加载配置项
+spring:
+  application:
+    name: api-gateway #网关
+
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server
+      profile: a
+      label: master
+
+

@@ -1,0 +1,20 @@
+#使用bootstrap优先启动 先加载配置项
+spring:
+  application:
+    name: product-server #application 为product-server
+
+  cloud:
+    config:
+      discovery:
+        enabled: true #拼写。。 这里少写了个d找了一个小时。。。 无语了
+        #需要大写
+        service-id: config-server #这里大小写无所谓 也可以使用uri 但使用service-id方便集群
+      profile: a #指定环境 config-a
+      label: master
+#env: linjiawei
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+

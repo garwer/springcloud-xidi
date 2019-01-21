@@ -1,0 +1,6 @@
+include "eureka-server"
+include "eureka-client"
+include "config-server"
+include "config-client"
+include "product-server"
+include "zuul"

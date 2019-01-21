@@ -1,0 +1,49 @@
+#spring配置中心 读取配置后 可转换
+#label 分支
+#1 {name}-{profiles} .yml 2 {label}/{name}-{profiles}.yml 会合并 name 放公用配置
+spring:
+  application:
+    name: config-server
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/garwer/config
+          username: garwer
+          password: woshiLJW123
+          #可配置存储路径
+          #basedir:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+#config 8080端口
+server:
+  port: 8080
+
+eureka:
+  #instance hostname
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+#关闭安全验证 spring2+ 以下配置过时
+#management:
+#  security:
+#     enabled: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - bus-refresh
+
+
+#可访问 http://localhost:8080/config-a.yml【-a, -b都行,但不能不写，如果内容格式错误将报错】 http://localhost:8080/config-b.json 等等 将进行格式校验
+#默认master分支 如果加一个分支 如dev 如 http://localhost:8080/dev/config-a.json
+#/{name}/{profiles}  /{label}/{name}-{profiles}
+# 结果为合并的
+# http://localhost:8080/config-dev.yml/label:dev 带版本号
